@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <section class="calculator" aria-label="Calculator">
+      <header class="calc-header">
+        <h1 class="calc-title">Calculator</h1>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark and light mode">🌙</button>
+      </header>
+
+      <div class="display" id="display" aria-live="polite">
+        <div class="previous-operand" id="previous-operand"></div>
+        <div class="current-operand" id="current-operand">0</div>
+      </div>
+
+      <div class="buttons" id="buttons">
+        <button class="btn btn-function" type="button" data-action="clear">AC</button>
+        <button class="btn btn-function" type="button" data-action="delete">DEL</button>
+        <button class="btn btn-operator" type="button" data-operator="÷">÷</button>
+        <button class="btn btn-operator" type="button" data-operator="×">×</button>
+
+        <button class="btn" type="button" data-number="7">7</button>
+        <button class="btn" type="button" data-number="8">8</button>
+        <button class="btn" type="button" data-number="9">9</button>
+        <button class="btn btn-operator" type="button" data-operator="−">−</button>
+
+        <button class="btn" type="button" data-number="4">4</button>
+        <button class="btn" type="button" data-number="5">5</button>
+        <button class="btn" type="button" data-number="6">6</button>
+        <button class="btn btn-operator" type="button" data-operator="+">+</button>
+
+        <button class="btn" type="button" data-number="1">1</button>
+        <button class="btn" type="button" data-number="2">2</button>
+        <button class="btn" type="button" data-number="3">3</button>
+        <button class="btn btn-equals" type="button" data-action="equals">=</button>
+
+        <button class="btn btn-zero" type="button" data-number="0">0</button>
+        <button class="btn" type="button" data-action="decimal">.</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
