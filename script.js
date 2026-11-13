@@ -61,7 +61,7 @@ function compute() {
     case '+': result = a + b; break;
     case '−': result = a - b; break;
     case '×': result = a * b; break;
-    case '÷': result = a / b; break;
+    case '^': result = Math.pow(a, b); break;  
     default: return;
   }
 
@@ -85,7 +85,30 @@ function deleteLast() {
     state.currentValue = '0';
   }
 }
+// ===== SCIENTIFIC OPERATIONS =====
+// Works on the number currently in the display: %, √ and x²
+function applyUnaryOperation(type) {
+  const value = parseFloat(state.currentValue);
+  let result;
 
+  switch (type) {
+    case 'percent': result = value / 100; break;
+    case 'sqrt': result = Math.sqrt(value); break;
+    case 'square': result = value * value; break;
+    default: return;
+  }
+
+  state.currentValue = formatResult(result);
+  state.shouldResetScreen = true;
+}
+
+// +/- : flips the sign of the number in the display
+function toggleSign() {
+  if (state.currentValue === '0') return;
+  state.currentValue = state.currentValue.startsWith('-')
+    ? state.currentValue.slice(1)
+    : '-' + state.currentValue;
+}
 // ===== ACTION ROUTER =====
 // Every button with data-action="..." ends up here.
 function handleAction(action) {
@@ -94,6 +117,10 @@ function handleAction(action) {
     case 'delete': deleteLast(); break;
     case 'decimal': appendDecimal(); break;
     case 'equals': compute(); break;
+    case 'percent':
+    case 'sqrt':
+    case 'square': applyUnaryOperation(action); break;
+    case 'negate': toggleSign(); break;
   }
 }
 
@@ -167,6 +194,11 @@ document.addEventListener('keydown', (event) => {
   else if (key === '-') handleInput('operator', '−');
   else if (key === '*' || key === 'x') handleInput('operator', '×');
   else if (key === '/') handleInput('operator', '÷');
+  else if (key === '^') handleInput('operator', '^');
+  else if (key === '%') handleInput('action', 'percent');
+  else if (key === 'r' || key === 'R') handleInput('action', 'sqrt');
+  else if (key === 's' || key === 'S') handleInput('action', 'square');
+  else if (key === 'n' || key === 'N') handleInput('action', 'negate');
   else if (key === 'Enter' || key === '=') handleInput('action', 'equals');
   else if (key === 'Backspace') handleInput('action', 'delete');
   else if (key === 'Escape' || key === 'Delete') handleInput('action', 'clear');

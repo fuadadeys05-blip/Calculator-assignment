@@ -182,3 +182,11 @@ body {
 .btn-zero {
   grid-column: span 2;
 }
+
+/* ===== SCIENTIFIC BUTTONS ===== */
+.btn-scientific {
+    background-color: var(--function-bg);
+    color: var(--operator-text);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
